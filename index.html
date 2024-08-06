@@ -1,4 +1,4 @@
-```html
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,36 +6,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Voiceflow Widget</title>
     <style>
-        html, body {
+        /* Ensure the widget content scales well */
+        body {
             margin: 0;
             padding: 0;
-            height: 100%;
             overflow: hidden;
         }
-        #voiceflow-chat {
+        #voiceflow-container {
             width: 100%;
-            height: 100%;
+            height: 100vh;
         }
     </style>
 </head>
 <body>
-    <h1 style="display: none;">Ewok_Feedback</h1>
-    <div id="voiceflow-chat"></div>
+    <div id="voiceflow-container"></div>
     <script type="text/javascript">
-      (function(d, t) {
-          var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
-          v.onload = function() {
-            window.voiceflow.chat.load({
-              verify: { projectID: '66b15d6bc4ae7f489b240c4c' },
-              url: 'https://general-runtime.voiceflow.com',
-              versionID: 'production',
-              container: 'voiceflow-chat'
-            });
-          }
-          v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
-      })(document, 'script');
+        (function(d, t) {
+            var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+            v.onload = function() {
+                window.voiceflow.chat.load({
+                    verify: { projectID: '66b15d6bc4ae7f489b240c4c' },
+                    url: 'https://general-runtime.voiceflow.com',
+                    versionID: 'production',
+                    container: 'voiceflow-container'
+                }).then(() => {
+                    setTimeout(function() {
+                        window.voiceflow.chat.open();
+                    }, 200);
+                });
+            }
+            v.src = "https://cdn.voiceflow.com/widget/bundle.mjs";
+            v.type = "text/javascript";
+            s.parentNode.insertBefore(v, s);
+        })(document, 'script');
     </script>
 </body>
 </html>
-
-```
